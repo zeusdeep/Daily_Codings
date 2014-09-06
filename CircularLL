@@ -1,0 +1,54 @@
+
+public class CircularLL {
+	public int data;
+	public CircularLL nextlink;
+	public CircularLL prevlink;
+	public static CircularLL first=null;
+	public static CircularLL last=null;
+   static int threshold=0;
+	public static CircularLL temp=first;
+	
+	public CircularLL(int data)
+	{
+		this.data=data;
+		System.out.println("Dealing with "+data);
+	}
+	
+	public static void insert(CircularLL n)
+	{
+		if(first==null)
+		{
+			System.out.println("Inserting "+ n.data);
+			first=n;
+			first.nextlink=null;
+			last=n;
+			last.nextlink=null;
+			threshold++;
+			System.out.println("Inserted "+ n.data);
+		}
+		else if(threshold<10)
+		{
+			System.out.println("Inserting "+ n.data);
+			temp=last;
+			last.nextlink=n;
+			last=n;
+			last.nextlink=null;
+			threshold++;
+			System.out.println("Inserted "+ n.data);		
+		}
+		
+		else if(threshold==10)
+		{
+			n.nextlink=first;
+			first=n;
+			last=first;
+			for(int i=0;i<threshold;i++)
+			{
+				last=last.nextlink;
+			}
+			last.nextlink=null;
+		}
+	}
+	
+	
+}
