@@ -1,0 +1,41 @@
+import java.util.Arrays;
+
+
+public class DictionarySorter {
+
+			public String[] sort(String[] temp)
+			{
+				
+			for(int j=0;j<temp.length;j++)
+			{
+				if(temp[j].equals("/ae"))
+						{
+							temp[j]="az";
+						}
+				if(temp[j].equals("/th"))
+				{
+					temp[j]="tz";
+				}
+			}
+			Arrays.sort(temp);
+			for(int j=0;j<temp.length;j++)
+			{
+				if(temp[j].equals("az"))
+						{
+							temp[j]="/ae";
+						}
+				
+				if(temp[j].equals("tz"))
+				{
+					temp[j]="/th";
+				}
+			}
+			
+			return temp;
+			}
+			//System.out.println();
+		}
+	
+	
+	
+	
