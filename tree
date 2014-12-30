@@ -1,0 +1,191 @@
+import java.util.ArrayList;
+
+class Tree
+  {
+  
+  protected int data;
+  protected Tree root=null;
+  protected Tree lchild=null;
+  protected Tree rchild=null;
+  protected Tree parent=null;
+   int i=0;
+  public Tree(int x)
+    {
+       data=x;
+       
+  }
+  
+  public Tree()
+    {
+       
+  }
+  
+  public void insert(Tree x)
+    {
+	  Tree temp=root;
+      Tree par=null;
+    if(root==null)
+      {
+      
+      root=x;
+      root.lchild=null;
+      root.rchild=null;
+      root.parent=null;
+      
+      System.out.println("Inserted at root "+root.data);
+    }
+    
+    else
+      {
+      
+      while(temp!=null)
+        {
+        if(x.data<=temp.data)
+          {
+        	par=temp;
+          temp=temp.lchild;
+          
+          System.out.println("Going left after "+par.data);
+        }
+          else
+            {
+        	  par=temp;
+            temp=temp.rchild;
+             System.out.println("Going right after "+par.data);
+           
+          }
+        i=i+1;
+        }
+      
+    temp=x;
+    temp.lchild=null;
+    temp.rchild=null;
+    temp.parent=par;
+     System.out.println("Inserted "+x.data+" after  "+temp.parent.data);
+     if((temp.data<=par.data)&&(par.lchild==null))
+     {
+    	par.lchild=temp;
+     }
+     if((temp.data>par.data)&&(par.rchild==null))
+     {
+    	 par.rchild=temp;
+     }
+     
+        }
+    }
+  
+  public void inOrderTraversal(Tree x)
+  {
+	  if((x.lchild==null)&&(x.rchild==null))
+			  {
+		  		System.out.print(x.data+" --> ");
+		  		return;
+			  }
+	  
+	  if(x.lchild!=null)
+	  {
+		  inOrderTraversal(x.lchild);
+	  }
+	  System.out.print(x.data+" --> ");
+	  if(x.rchild!=null)
+	  {
+		  inOrderTraversal(x.rchild);
+	  }
+	  
+  }
+  
+  
+  public void LCA(Tree x, Tree y)
+  {
+	  System.out.println("Y" +y.data);
+	  Tree t1=root;
+	  Tree t2=root;
+	  ArrayList <Integer> list1=new ArrayList<Integer>();
+	  ArrayList <Integer> list2=new ArrayList<Integer>();
+	  
+	  System.out.println("Inserting "+t1.data+" in list 1");
+	  list1.add(t1.data);
+	  while((t1.lchild!=null)&&(t1.rchild!=null))
+	  {
+		  if(x.data<t1.data)
+		  {
+			  t1=t1.lchild;
+			  list1.add(t1.data);
+			  System.out.println("Inserted "+t1.data+" in list 1");
+			  if(t1.data==x.data)
+			  break;
+		  }
+		  else
+		  {
+			  t1=t1.rchild;
+			  list1.add(t1.data);
+			  System.out.println("Inserted "+t1.data+" in list 1");
+			  if(t1.data==x.data)
+			  break;
+		  }
+	  }
+	  
+	  System.out.println("Inserting "+t2.data+" in list 2");
+	  list2.add(t2.data);
+	  while((t2.lchild!=null)&&(t2.rchild!=null))
+	  {
+		  if(y.data<t2.data)
+		  {
+			  t2=t2.lchild;
+			  list2.add(t2.data);
+			  System.out.println("Inserted "+t2.data+" in list 2");
+			  if(t2.data==y.data)
+			  break;
+		  }
+		  else
+		  {
+			  t2=t2.rchild;
+			  list2.add(t2.data);
+			  System.out.println("Inserted "+t2.data+" in list 2");
+			  if(t2.data==y.data)
+			  break;
+		  }
+	  }
+	  
+	  int ans=0;
+	  for(int i=0;i<list2.size();i++)
+	  {
+		  System.out.println(i);
+		  System.out.println("LIST 1 "+ list1.get(i));
+		 System.out.println("LIST 2 "+ list2.get(i));
+		  if(list2.get(i)==list1.get(i))
+		  {
+			  ans=list2.get(i);
+			  System.out.println("Matching");
+		  }
+	  }
+	  
+	  if(ans==0)
+	  {
+		  System.out.println("No Comman Ancestor");
+	  }
+	  
+	  else
+		  System.out.println("Comman ancestor is "+ans);
+	  
+	  
+  }
+}
+
+class Solution {
+  public static void main(String[] args) {
+    Tree x=new Tree();
+    x.insert(new Tree(10));
+    x.insert(new Tree(4));
+    x.insert(new Tree(12));
+    x.insert(new Tree(2));
+    x.insert(new Tree(7));
+    x.insert(new Tree(11));
+    x.insert(new Tree(13));
+    x.insert(new Tree(1));
+    x.insert(new Tree(3));
+    x.insert(new Tree(17));
+    x.inOrderTraversal(x.root);
+   // x.LCA(new Tree(1), new Tree(4));
+    }
+  }
