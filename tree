@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 class Tree
   {
@@ -8,6 +10,7 @@ class Tree
   protected Tree lchild=null;
   protected Tree rchild=null;
   protected Tree parent=null;
+  protected boolean visited;
   public Tree(int x)
     {
        data=x;
@@ -85,7 +88,7 @@ class Tree
 	  {
 		  inOrderTraversal(x.lchild);
 	  }
-	  System.out.print(x.data+" --> ");
+	  System.out.print(x.data+" --> "); //to print root or the interval node
 	  if(x.rchild!=null)
 	  {
 		  inOrderTraversal(x.rchild);
@@ -201,7 +204,37 @@ class Tree
 	  
 	  
   }
- }
+  
+  public void BFS(Tree y)
+  {
+	  Queue <Tree> q=new LinkedList();
+	  
+	  if(y.visited!=true)
+	  {
+	  q.add(y); // inserting root
+	  y.visited=true;
+	  }
+	  while(true)
+	  {
+	  Tree x=q.poll();
+	  if((x.lchild!=null)&&(x.lchild.visited!=true))
+	  {
+		  x.lchild.visited=true;
+		  q.add(x.lchild);
+	  }
+	  
+	  if((x.rchild!=null)&&(x.rchild.visited!=true))
+	  {
+		  x.rchild.visited=true;
+		  q.add(x.rchild);
+	  }
+	  System.out.print(x.data+" --> ");
+	  if(q.size()==0)
+		 return;
+	  
+	  }
+  }
+}
 
 class Solution {
   public static void main(String[] args) {
@@ -216,9 +249,10 @@ class Solution {
     x.insert(new Tree(1));
     x.insert(new Tree(3));
     x.insert(new Tree(17));
-    //x.inOrderTraversal(x.root);
+   // x.inOrderTraversal(x.root);
    // x.LCA(new Tree(1), new Tree(4));
-    int ans=x.sum(x.root);
-    System.out.println(ans);
+   // int ans=x.sum(x.root);
+   // System.out.println(ans);
+    x.BFS(x.root);
     }
   }
