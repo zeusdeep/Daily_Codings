@@ -8,7 +8,6 @@ class Tree
   protected Tree lchild=null;
   protected Tree rchild=null;
   protected Tree parent=null;
-   int i=0;
   public Tree(int x)
     {
        data=x;
@@ -54,7 +53,7 @@ class Tree
              System.out.println("Going right after "+par.data);
            
           }
-        i=i+1;
+       // i=i+1;
         }
       
     temp=x;
@@ -170,7 +169,39 @@ class Tree
 	  
 	  
   }
-}
+  
+  
+  public int sum(Tree x)
+  {
+	  int sum=0;
+	  if ((x.lchild==null)&&(x.rchild==null))
+	  {
+		  System.out.println("LEAF " +x.data);
+		  return x.data;
+	  }
+	  if(x.lchild!=null)
+	  {
+		  System.out.println("LEFT " +x.data);
+		  sum+=sum(x.lchild);
+		  System.out.println("SUM Left for "+x.data+" is "+sum);
+		  
+		 
+	  }
+	  if(x.rchild!=null)
+	  {
+		  System.out.println("Right " +x.data);
+		  sum+=sum(x.rchild);
+		  System.out.println("SUM Right for "+x.data+" is "+sum);
+		  
+		  //System.out.println(sum);
+	  }
+	  
+	  sum+=x.data;
+	  return sum;
+	  
+	  
+  }
+ }
 
 class Solution {
   public static void main(String[] args) {
@@ -185,7 +216,9 @@ class Solution {
     x.insert(new Tree(1));
     x.insert(new Tree(3));
     x.insert(new Tree(17));
-    x.inOrderTraversal(x.root);
+    //x.inOrderTraversal(x.root);
    // x.LCA(new Tree(1), new Tree(4));
+    int ans=x.sum(x.root);
+    System.out.println(ans);
     }
   }
