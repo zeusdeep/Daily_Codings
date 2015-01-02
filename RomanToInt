@@ -1,0 +1,32 @@
+//only implemented for a few basic cases. To add more cases , just populate the hashmap
+
+import java.util.HashMap;
+import java.util.StringTokenizer;
+
+
+public class RomanToInt {
+	
+	public static void main(String args[])
+	{
+		String x="Hello My name is khan. I am X years old";
+		x=x.replace('l'+"",'x'+"");
+		System.out.println(x);
+		HashMap <String,Integer> h=new HashMap<String,Integer>();
+		h.put("X",10);
+		h.put("IX",9);
+		h.put("V",5);
+		String ret="";
+		StringTokenizer y=new StringTokenizer(x);
+		while(y.hasMoreTokens())
+		{
+			String temp=y.nextToken();
+			if(h.containsKey(temp))
+					{
+						ret+=h.get(temp)+" ";
+					}
+			else
+				ret+=temp+" ";
+		}
+		System.out.println(ret);
+	}
+}
