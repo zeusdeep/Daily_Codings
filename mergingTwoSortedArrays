@@ -1,0 +1,75 @@
+import java.io.*;
+import java.util.*;
+
+
+
+class mergingTwoSortedArrays {
+  
+  
+  public static void merge(int a[],int b[],int aCount, int bCount,int aSize)
+    {
+       int insertPointer=aSize-1;
+       int aPointer=aCount-1;
+       int bPointer=bCount-1;
+    
+    while((aPointer>=0)||(bPointer>=0))
+      {
+      
+      if(aPointer<0)
+        {
+        
+        a[insertPointer]=b[bPointer];
+        bPointer--;
+        insertPointer--;
+        
+        }
+      
+      else if(bPointer<0)
+        {
+        
+        a[insertPointer]=a[bPointer];
+        aPointer--;
+        insertPointer--;
+        }
+      else if(a[aPointer]>=b[bPointer])
+        {
+        
+        a[insertPointer]=a[aPointer];
+        aPointer--;
+        insertPointer--;
+      }
+      
+      else if(a[aPointer]<b[bPointer])
+        {
+        a[insertPointer]=b[bPointer];
+        bPointer--;
+        insertPointer--;
+      }
+      
+      
+      
+    }
+    
+  }
+  public static void main(String[] args) {
+     int a[]=new int[10];
+     int b[]=new int[5];
+    
+    a[0]=3;
+    a[1]=7;
+    a[2]=7;
+    a[3]=23;
+    a[4]=78;
+    b[0]=1;
+    b[1]=5;
+    b[2]=9;
+    b[3]=12;
+    b[4]=19;
+    
+    merge(a,b,5,5,10);
+    for(int i=0;i<10;i++)
+      {
+      System.out.print(a[i]+" ");
+    }
+    }
+  }
