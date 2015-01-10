@@ -1,0 +1,121 @@
+import java.io.*;
+import java.util.*;
+
+/*
+ * To execute Java, please define "static void main" on a class
+ * named Solution.
+ *
+ * If you need more classes, simply define them inline.
+ */
+
+class DeepTree
+  {
+  
+  public int data;
+  public DeepTree root;
+  public DeepTree l;
+  public DeepTree r;
+  public DeepTree i;
+  public boolean visited;
+  Queue <DeepTree> q=new LinkedList<DeepTree>();
+  DeepTree(int data)
+    {
+    this.data=data;
+  }
+  
+  DeepTree()
+    {
+    
+  }
+    
+  public void insert(DeepTree x)
+    {
+     
+    if(root==null)
+      {
+      root=x;
+      root.l=null;
+      root.r=null;
+      q.add(root);
+      System.out.println("Inserted "+q.peek().data);
+      return;
+    }
+      DeepTree i=q.peek();
+      //System.out.println("Removed 1 "+i); 
+      if(i.l==null)
+      {
+      i.l=x;
+      i.l.l=null;
+      i.l.r=null;
+      q.add(i.l);
+      System.out.println("Inserted "+i.l.data);
+    }
+     else if(i.r==null)
+      {
+      i.r=x;
+      i.r.l=null;
+      i.r.r=null;
+      q.add(i.r);
+      q.remove();
+        System.out.println("Inserted "+i.r.data);
+    }
+  }
+  
+  
+  public void display(DeepTree x)
+  {
+    //inOrder
+    
+    if(x==null)
+      {
+      return;
+    }
+    
+    if((x.l==null)&&(x.r==null))
+      {
+      x.visited=true;
+      System.out.print(x.data+" ");
+      return;
+    }
+    
+    else {
+      DeepTree t=x;
+      Queue <DeepTree> q=new LinkedList<DeepTree>();
+      q.add(t);
+        if((t.l!=null)||(t.l.visited==false))
+          {
+         // t=t.l;
+          t.visited=true;
+         display(t.l);
+          }
+           DeepTree print=q.poll();
+           System.out.print(print.data+" ");
+      
+      if((t.r!=null)||(t.r.visited==false))
+          {
+          //t=t.r;
+          t.visited=true;
+          display(t.r);
+          }
+      
+      }
+    }
+  
+}
+class Solution {
+  public static void main(String[] args) {
+   DeepTree d=new DeepTree();
+    d.insert(new DeepTree(10));
+    d.insert(new DeepTree(12));
+     d.insert(new DeepTree(9));
+    d.insert(new DeepTree(11));
+     d.insert(new DeepTree(8));
+    d.insert(new DeepTree(10));
+     d.insert(new DeepTree(7));
+    d.insert(new DeepTree(9));
+     d.insert(new DeepTree(6));
+    d.insert(new DeepTree(8));
+     d.insert(new DeepTree(5));
+    d.display(d.root);
+    }
+  }
