@@ -62,6 +62,43 @@ class DeepTree
   }
   
   
+   public DeepTree LCA(DeepTree x,DeepTree y)
+    {
+    if((x==root)||(y==root))
+      {
+      return root;
+    }
+    
+    DeepTree leftx=LCA(x,root.l);
+    DeepTree lefty=LCA(y,root.l);
+    DeepTree rightx=LCA(x,root.r);
+    DeepTree righty=LCA(y,root.r);
+    if((leftx!=null)&&(lefty!=null))
+      {
+      return LCA(leftx,lefty);
+    }
+    
+    else if((leftx!=null)&&(lefty==null)&&(righty!=null))
+      {
+      return root;
+    }
+    
+   else if((leftx==null)&&(lefty!=null)&&(rightx!=null))
+      {
+      return root;
+    }
+    
+    else if((leftx==null)&&(lefty==null))
+      {
+      return null;
+    }
+    
+   else if((rightx!=null)&&(righty!=null))
+      {
+      return LCA(rightx,righty);
+    }
+    return null;
+  }
   public void display(DeepTree x)
   {
     //inOrder
