@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+
+/*
+ * To execute Java, please define "static void main" on a class
+ * named Solution.
+ *
+ * If you need more classes, simply define them inline.
+ */
+
+class Solution {
+  public static void main(String[] args) {
+    LinkedList<Integer> intList = new LinkedList<Integer>();
+    intList.add(0);
+    intList.add(1);
+    intList.add(2);
+    intList.add(3);
+    intList.add(4);
+    intList.add(5);
+    intList.add(6);
+    intList.add(7);
+    intList.add(8);
+    
+    int num1=0;
+    int num2=1;
+    int fibonacciNum=0;
+    int removePosition=0;
+    int itemsRemoved=0;
+    while(removePosition<=intList.size()-1)
+      {
+      
+      fibonacciNum=num1+num2;
+      num1=num2;
+      num2=fibonacciNum;
+      removePosition=fibonacciNum-itemsRemoved;
+      intList.remove(removePosition);
+      itemsRemoved ++;
+    }
+    
+    for(int i=0;i<intList.size();i++)
+      {
+      System.out.print(intList.get(i)+" --> ");
+    }
+    
+    
+    }
+  }
