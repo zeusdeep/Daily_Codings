@@ -1,0 +1,163 @@
+import java.io.*;
+import java.util.*;
+
+/*
+ * To execute Java, please define "static void main" on a class
+ * named Solution.
+ *
+ * If you need more classes, simply define them inline.
+ */
+class Deep
+  {
+  Deep root;
+  Deep l;
+  Deep r;
+  int data;
+  boolean lfound;
+  boolean rfound;
+  int LCANode;
+  boolean visited=false;
+  boolean isFilled=false;
+  Queue <Deep> q=new LinkedList<Deep>();
+  Deep()
+    {
+    
+  }
+  
+  Deep(int x)
+    {
+    data=x;
+  }
+  
+  boolean isComplete(Deep x)
+    {
+    if(x.l!=null && x.r!=null)
+      return true;
+    else return false;
+  }
+  
+  void insert(Deep x)
+    {
+      
+    if(root==null)
+      {
+      root=x;
+      q.add(root);
+      System.out.println("Inserted Root");
+    }
+    
+    else
+      {
+       Deep temp=q.peek();
+       if(temp.l==null)
+         {
+         temp.l=x;
+         q.add(temp.l);
+          System.out.println("Inserted "+x.data+" to the left of "+temp.data);
+       }
+       
+       else if(temp.r==null)
+         {
+         temp.r=x;
+         q.add(temp.r);
+         System.out.println("Inserted "+x.data+" to the right of "+temp.data);
+       }
+       
+       if(isComplete(temp))
+         {
+         q.remove();
+       }
+      
+    }
+  }
+  void LCA(Deep initial,Deep x,Deep y)
+    {
+    if(initial.data==x.data)
+      {
+      lfound=true;
+      LCANode=initial.data;
+      //isFilled=true;
+      System.out.println("Found "+x.data);
+      }
+    else if(initial.data==y.data)
+      {
+      rfound=true;
+      LCANode=initial.data;
+       //isFilled=true;
+      System.out.println("Found "+y.data);
+
+    }
+    
+    else if(lfound==true && rfound==true)
+      {
+      isFilled=true;
+    }
+      else if(initial.l!=null)
+        {
+        System.out.println("Checking "+initial.l.data);
+          LCA(initial.l,x,y);
+        }
+      else if(lfound==true && rfound==true && isFilled==false)
+        {
+         LCANode=initial.data;
+         isFilled=true;
+      }
+      else if(root.r!=null)
+        {
+        System.out.println(root.data);
+          LCA(root.r,x,y);
+        System.out.println("Checking "+initial.r.data);
+       }
+     else if(lfound==true && rfound==true && isFilled==false)
+        {
+         LCANode=initial.data;
+        isFilled=true;
+      }
+      
+    }
+  
+  
+  
+  
+  int sumTree(Deep x)
+    {
+    int sum=0;
+    if(x.l==null && x.r==null)
+      {
+      return x.data;
+    }
+   
+    if(x.l!=null)
+      {
+      sum=sum+sumTree(x.l);
+    }
+   
+    if(x.r!=null )
+      {
+      sum=sum+sumTree(x.r);
+    }
+     sum=sum+x.data;
+    return sum;
+  }
+  
+}
+class Solution {
+  public static void main(String[] args) {
+    Deep d=new Deep();
+    d.insert(new Deep(5));
+    d.insert(new Deep(6));
+    d.insert(new Deep(7));
+     d.insert(new Deep(15));
+    d.insert(new Deep(16));
+    d.insert(new Deep(17));
+     d.insert(new Deep(25));
+    d.insert(new Deep(26));
+    d.insert(new Deep(27));
+    
+    //System.out.println(d.LCA.data);
+    //d.LCA(d.root,new Deep(26),new Deep(27));
+    int x=d.sumTree(d.root);
+    System.out.println("ANs" +x);
+    
+    }
+  }
